@@ -1,0 +1,11 @@
+---
+- hosts: nodes
+
+  vars: 
+    - exchange_item: meta.mathematica.stackexchange.com.7z
+    - url: "http://archive.org/download/stackexchange/{{exchange_item}}"
+    - dest_dir: /tmp
+
+  tasks:
+    - name: get stack overflow data
+      shell: "wget -nv -P {{dest_dir}} {{url}}

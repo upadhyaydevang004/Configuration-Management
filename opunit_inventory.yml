@@ -1,0 +1,8 @@
+---
+- baker:
+  - name: ansible-srv
+    target: servers/ansible-srv
+    criteria_path: test/ansible-srv.yml
+  - name: web-srv
+    target: servers/web-srv
+    criteria_path: test/web-srv.yml

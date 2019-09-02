@@ -1,0 +1,24 @@
+---
+- hosts: nodes
+
+  vars: 
+    packages:
+      - python-dev
+      - python-pip
+      - gcc
+      - python-setuptools
+      - git-core
+      - python-setuptools
+      - debconf-utils
+
+  tasks: 
+    - name: Install git
+      apt: pkg=git state=present update_cache=yes
+      become: yes
+
+    # emit a debug message with each package
+    - debug:
+        msg: "{{ item }}"
+      with_items: "{{packages}}"
+
+    # Combine the two commands to install a list of packages

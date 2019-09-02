@@ -1,0 +1,23 @@
+- group:
+   description: "Essential development tools"
+   checks:
+     - version:
+         cmd: ansible --version
+         range: ^2.7.x
+
+- group:
+    description: "ssh keys"
+    checks:
+     - contains: 
+         comment: The private key for the web server should be stored on ansible server.
+         string: -----BEGIN
+         file: ~/.ssh/web-srv
+
+- group:
+    description: "Inventory setup"
+    checks:
+     - contains: 
+         comment: The web-srv ip address should be specified in the ansible inventory file
+         string: 192.168.33.100
+         file: ~/inventory
+

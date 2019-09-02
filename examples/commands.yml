@@ -1,0 +1,22 @@
+---
+- hosts: localhost
+
+  vars:
+    - key_file: "{{ ansible_env.HOME }}/.ssh/my_key"
+
+  tasks: 
+    - name: Ensure .ssh directory exists.
+      file: 
+        dest: "{{ key_file | dirname }}"
+        mode: 0700 
+        owner: "{{ansible_user}}"
+        state: directory
+
+    # http://docs.ansible.com/ansible/user_module.html
+    - name: Create a 2048-bit SSH key for {{ansible_user}} in ~/.ssh
+      user:
+        name: "{{ansible_user}}"
+        generate_ssh_key: yes
+        ssh_key_bits: 2048
+        ssh_key_file: "{{key_file}}"
+

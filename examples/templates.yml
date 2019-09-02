@@ -1,0 +1,10 @@
+---
+- hosts: nodes
+
+  vars:
+    - mysql_account: "vagrant"
+    - root_db_password: "define_in_vault"
+
+  tasks: 
+    - name: Copy mysql configuration to nodes
+      template: src=templates/.my.cnf dest={{ ansible_env.HOME}}/.my.cnf owner={{mysql_account}} mode=0600    
